@@ -1,0 +1,9 @@
+{
+  "desc": "组织内部工具，不参与索引",
+  "rules": [
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

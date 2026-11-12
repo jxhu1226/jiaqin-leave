@@ -1,0 +1,13 @@
+{
+  "name": "jiaqin",
+  "private": true,
+  "description": "假勤：微信小程序请假审批与公共日历",
+  "scripts": {
+    "sync-shared": "node scripts/sync-shared.js",
+    "gen-icons": "node scripts/gen-icons.js",
+    "test": "node scripts/run-tests.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,36 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="sub-page" wx:if="{{forbidden}}">
+    <view class="card">
+      <view class="card-title">仅管理员可管理成员</view>
+      <view class="muted access-copy">请让现有管理员在这里为你开通权限。</view>
+    </view>
+  </view>
+  <view class="sub-page" wx:else>
+    <view class="lede">同事打开一次小程序后会出现在名单里。不能取消自己的管理员身份，组织里也要至少留下一名管理员。</view>
+    <view class="hint" wx:if="{{listLoading || (!loaded && !listError)}}">正在读取成员…</view>
+    <view class="card" wx:elif="{{listError}}">
+      <view>{{listError}}</view>
+      <button class="btn-plain sm retry" hover-class="btn-hover" bindtap="loadMembers">重试</button>
+    </view>
+    <view class="empty" wx:elif="{{loaded && members.length === 0}}">
+      <view class="empty-title">还没有成员</view>
+      <view class="muted">同事打开小程序并登录后会出现在这里。</view>
+    </view>
+    <view class="card member" wx:for="{{members}}" wx:key="openid">
+      <view class="avatar" style="background: {{item.avatar.color}};">{{item.avatar.letter}}</view>
+      <view class="member-main">
+        <view class="member-name">{{item.displayName}}</view>
+        <view class="muted">{{item.department || '未填部门'}} · {{item.roleLabel}}</view>
+      </view>
+      <view
+        wx:if="{{item.openid !== user.openid}}"
+        class="text-btn"
+        data-openid="{{item.openid}}"
+        data-role="{{item.role}}"
+        data-name="{{item.displayName}}"
+        bindtap="onToggle"
+      >{{item.role === 'admin' ? '取消管理员' : '设为管理员'}}</view>
+      <text wx:else class="me">我</text>
+    </view>
+  </view>
+</page-state>

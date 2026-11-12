@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/calendar/calendar",
+    "pages/leave/leave",
+    "pages/approval/approval",
+    "pages/profile/profile",
+    "pages/leave-form/leave-form",
+    "pages/leave-detail/leave-detail",
+    "pages/members/members"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#f6f4ef",
+    "navigationBarTitleText": "假勤",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f4ef",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#6d675f",
+    "selectedColor": "#0f6e56",
+    "backgroundColor": "#fffcf7",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/calendar/calendar",
+        "text": "日历",
+        "iconPath": "assets/tab/calendar.png",
+        "selectedIconPath": "assets/tab/calendar-on.png"
+      },
+      {
+        "pagePath": "pages/leave/leave",
+        "text": "请假",
+        "iconPath": "assets/tab/leave.png",
+        "selectedIconPath": "assets/tab/leave-on.png"
+      },
+      {
+        "pagePath": "pages/approval/approval",
+        "text": "审批",
+        "iconPath": "assets/tab/approval.png",
+        "selectedIconPath": "assets/tab/approval-on.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/tab/profile.png",
+        "selectedIconPath": "assets/tab/profile-on.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

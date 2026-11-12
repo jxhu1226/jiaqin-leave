@@ -1,0 +1,38 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="tab-page">
+    <button class="btn-primary block" hover-class="btn-hover" bindtap="onCreate">申请请假</button>
+    <view class="summary" wx:if="{{summary}}">待审批 {{summary.pending}} 条 · 今年已通过 {{summary.approvedDaysText}} 天</view>
+
+    <view class="hint" wx:if="{{listLoading || (!loaded && !listError)}}">正在读取记录…</view>
+    <view class="card" wx:elif="{{listError}}">
+      <view>{{listError}}</view>
+      <button class="btn-plain sm retry" hover-class="btn-hover" bindtap="loadList">重试</button>
+    </view>
+    <view class="empty" wx:elif="{{loaded && list.length === 0}}">
+      <view class="empty-title">还没有请假记录</view>
+      <view class="muted">生病、年假或临时有事时，可以在这里提交申请。</view>
+    </view>
+    <block wx:else>
+      <view
+        class="card leave-card"
+        wx:for="{{list}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onOpen"
+        hover-class="card-hover"
+      >
+        <view class="card-top">
+          <view class="type-name">
+            <view class="dot dot-{{item.typeClass}}"></view>
+            <text>{{item.type}}</text>
+          </view>
+          <view class="tag tag-{{item.status}}">{{item.statusLabel}}</view>
+        </view>
+        <view class="range">{{item.rangeText}}</view>
+        <view class="meta">{{item.durationText}}</view>
+        <view class="reason" wx:if="{{item.reason}}">{{item.reason}}</view>
+      </view>
+      <view class="hint" wx:if="{{truncated}}">仅显示最近 200 条</view>
+    </block>
+  </view>
+</page-state>

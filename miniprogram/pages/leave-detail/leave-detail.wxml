@@ -1,0 +1,53 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="hint" wx:if="{{!leave}}">正在读取申请…</view>
+  <view class="sub-page" wx:if="{{leave}}">
+    <view class="card">
+      <view class="card-top">
+        <view class="type-name">
+          <view class="dot dot-{{leave.typeClass}}"></view>
+          <text>{{leave.type}}</text>
+        </view>
+        <view class="tag tag-{{leave.status}}">{{leave.statusLabel}}</view>
+      </view>
+      <view class="person">{{leave.userName || '未命名'}}<text wx:if="{{leave.department}}" class="muted"> · {{leave.department}}</text></view>
+      <view class="range">{{leave.rangeText}}</view>
+      <view class="meta">时长 {{leave.durationText}}</view>
+    </view>
+
+    <view class="card" wx:if="{{leave.access === 'private'}}">
+      <view class="label">原因</view>
+      <view class="body-text">{{leave.reason}}</view>
+    </view>
+    <view class="card" wx:else>
+      <view class="muted">事由仅本人和管理员可见。</view>
+    </view>
+
+    <view class="card" wx:if="{{leave.access === 'private'}}">
+      <view class="label">进度</view>
+      <view class="tl">提交于 {{leave.createdAtText}}</view>
+      <view class="tl" wx:if="{{leave.status === 'pending'}}">等待管理员审批</view>
+      <view class="tl" wx:if="{{leave.status === 'approved'}}">{{leave.reviewerName || '管理员'}} 于 {{leave.reviewedAtText}} 同意</view>
+      <view class="tl" wx:if="{{leave.status === 'rejected'}}">{{leave.reviewerName || '管理员'}} 于 {{leave.reviewedAtText}} 驳回</view>
+      <view class="tl" wx:if="{{leave.status === 'withdrawn'}}">于 {{leave.updatedAtText}} 撤回</view>
+      <view class="comment" wx:if="{{leave.reviewComment}}">{{leave.reviewComment}}</view>
+    </view>
+
+    <view class="footer-spacer" wx:if="{{showActions}}"></view>
+  </view>
+  <view class="footer-bar" wx:if="{{showActions}}">
+    <view class="footer-actions">
+      <button wx:if="{{isOwner}}" class="btn-plain sm" hover-class="btn-hover" bindtap="onWithdraw" loading="{{withdrawing}}" disabled="{{withdrawing}}">撤回</button>
+      <button wx:if="{{isAdmin}}" class="btn-ghost sm" hover-class="btn-hover" bindtap="onReject">驳回</button>
+      <button wx:if="{{isAdmin}}" class="btn-primary sm" hover-class="btn-hover" bindtap="onApprove">同意</button>
+    </view>
+  </view>
+  <review-dialog
+    show="{{reviewShow}}"
+    title="{{reviewTitle}}"
+    confirm-text="{{reviewConfirm}}"
+    danger="{{reviewDanger}}"
+    loading="{{reviewing}}"
+    bind:confirm="onConfirmReview"
+    bind:cancel="onCancelReview"
+  />
+</page-state>

@@ -1,0 +1,59 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="tab-page" wx:if="{{user}}">
+    <view class="card hero">
+      <view class="avatar" style="background: {{avatar.color}};">{{avatar.letter}}</view>
+      <view class="hero-text">
+        <view class="hero-name">{{name || '未填写姓名'}}</view>
+        <view class="muted">{{department || '未填部门'}}</view>
+        <view class="tag {{isAdmin ? 'tag-approved' : 'tag-withdrawn'}} role">{{isAdmin ? '管理员' : '成员'}}</view>
+      </view>
+    </view>
+
+    <view class="stats" wx:if="{{summary}}">
+      <view class="stat">
+        <view class="stat-num">{{summary.pending}}</view>
+        <view class="muted">待审批</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{summary.approvedDaysText}}</view>
+        <view class="muted">今年已通过（天）</view>
+      </view>
+    </view>
+    <view class="caption" wx:if="{{summary}}">已通过天数按请假开始日期计入当年。</view>
+
+    <view class="banner" wx:if="{{!name}}">填写姓名后才能提交请假。</view>
+
+    <view class="card">
+      <view class="label">姓名</view>
+      <input class="input" maxlength="20" placeholder="真实姓名" placeholder-class="ph" value="{{name}}" bindinput="onName" />
+      <view class="label gap">部门</view>
+      <input class="input" maxlength="20" placeholder="选填，如研发、行政" placeholder-class="ph" value="{{department}}" bindinput="onDepartment" />
+      <button class="btn-primary block save" hover-class="btn-hover" bindtap="onSave" loading="{{saving}}" disabled="{{saving}}">保存资料</button>
+    </view>
+
+    <view class="card">
+      <view class="card-title">OpenID</view>
+      <view class="openid">{{user.openid}}</view>
+      <button class="btn-plain sm copy" hover-class="btn-hover" bindtap="onCopy">复制</button>
+    </view>
+
+    <view class="card link-card" wx:if="{{isAdmin}}" bindtap="onMembers" hover-class="card-hover">
+      <view>
+        <view class="card-title">成员管理</view>
+        <view class="muted">授予或取消管理员权限</view>
+      </view>
+      <view class="chev">›</view>
+    </view>
+    <view class="note" wx:if="{{isAdmin}}">请在云开发控制台把 users 和 leaves 的权限设为「所有用户不可读写」。小程序发布范围请限定在组织内。</view>
+
+    <view class="card" wx:if="{{!isAdmin}}">
+      <view class="card-title">成为首位管理员</view>
+      <view class="steps">还没有管理员时，把上面的 OpenID 写入 cloud-shared/config.js 的 BOOTSTRAP_ADMIN_OPENIDS，运行 npm run sync-shared，重新上传 auth 云函数，再在本页下拉刷新。</view>
+      <view class="steps">如果部署时设置了初始化口令，也可以直接在这里使用。组织里一旦已有管理员，口令就不再生效。</view>
+      <input class="input" maxlength="64" placeholder="初始化口令" placeholder-class="ph" value="{{initCode}}" bindinput="onCode" />
+      <button class="btn-plain block claim" hover-class="btn-hover" bindtap="onClaim" loading="{{claiming}}" disabled="{{claiming}}">使用口令</button>
+    </view>
+
+    <view class="foot">假勤 · 组织内部使用</view>
+  </view>
+</page-state>

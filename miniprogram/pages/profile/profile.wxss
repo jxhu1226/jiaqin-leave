@@ -1,0 +1,105 @@
+.hero {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  color: #fffcf7;
+  font-size: 40rpx;
+  font-weight: 600;
+  text-align: center;
+  line-height: 96rpx;
+  margin-right: 24rpx;
+  flex: none;
+}
+
+.hero-name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.role {
+  display: inline-block;
+  margin-top: 8rpx;
+}
+
+.stats {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+
+.stat {
+  flex: 1;
+  background: #fffcf7;
+  border: 1rpx solid #e4dfd6;
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  margin-right: 16rpx;
+}
+
+.stat:last-child {
+  margin-right: 0;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #0f6e56;
+}
+
+.caption {
+  color: #9a9388;
+  font-size: 22rpx;
+  margin: 0 4rpx 20rpx;
+}
+
+.gap {
+  margin-top: 20rpx;
+}
+
+.save,
+.claim,
+.copy {
+  margin-top: 20rpx;
+}
+
+.openid {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  word-break: break-all;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chev {
+  color: #9a9388;
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.steps,
+.note {
+  color: #6d675f;
+  font-size: 24rpx;
+  line-height: 1.6;
+  margin-top: 12rpx;
+}
+
+.note {
+  margin: -4rpx 4rpx 20rpx;
+}
+
+.foot {
+  text-align: center;
+  color: #9a9388;
+  font-size: 22rpx;
+  margin-top: 12rpx;
+}

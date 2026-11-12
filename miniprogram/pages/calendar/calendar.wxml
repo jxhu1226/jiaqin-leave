@@ -1,0 +1,77 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="tab-page">
+    <view class="lede">已通过的请假对全员可见。事由只对本人和管理员开放。</view>
+    <view class="month-bar">
+      <view class="month-btn" hover-class="btn-hover" bindtap="onPrev">‹</view>
+      <view class="month-mid">
+        <view class="month-title">{{title}}</view>
+        <view class="today-link" wx:if="{{!viewingCurrentMonth}}" bindtap="onToday">回到今天</view>
+      </view>
+      <view class="month-btn" hover-class="btn-hover" bindtap="onNext">›</view>
+    </view>
+    <view class="summary" wx:if="{{loaded && !monthError}}">
+      <block wx:if="{{peopleCount > 0}}">本月 {{personDaysText}} 人天 · {{peopleCount}} 人请假</block>
+      <block wx:else>本月暂无已通过的请假</block>
+    </view>
+
+    <view class="cal" wx:if="{{loaded}}">
+      <view class="week">
+        <view wx:for="{{weekdays}}" wx:key="label" class="week-cell {{item.weekend ? 'weekend' : ''}}">{{item.label}}</view>
+      </view>
+      <view class="grid">
+        <view
+          wx:for="{{cells}}"
+          wx:key="key"
+          class="day {{item.inMonth ? '' : 'out'}} {{item.isSelected ? 'selected' : ''}} {{item.isWeekend ? 'weekend' : ''}}"
+          data-date="{{item.date}}"
+          bindtap="onSelectDay"
+        >
+          <block wx:if="{{item.inMonth}}">
+            <view class="num {{item.isToday ? 'today' : ''}}">{{item.day}}</view>
+            <view class="who" wx:for="{{item.preview}}" wx:for-item="who" wx:key="id">
+              <text class="who-name c-{{who.typeClass}}">{{who.shortName}}</text>
+            </view>
+            <view class="more" wx:if="{{item.more}}">+{{item.more}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="hint" wx:elif="{{monthLoading}}">正在读取日历…</view>
+
+    <view class="card error-card" wx:if="{{monthError}}">
+      <view>{{monthError}}</view>
+      <button class="btn-plain sm retry" hover-class="btn-hover" bindtap="onRetryMonth">重试</button>
+    </view>
+
+    <view class="legend" wx:if="{{loaded}}">
+      <view class="legend-item" wx:for="{{legend}}" wx:key="type">
+        <view class="dot dot-{{item.className}}"></view>
+        <text>{{item.type}}</text>
+      </view>
+    </view>
+
+    <view class="panel" wx:if="{{loaded && !monthError}}">
+      <view class="panel-title">{{selectedTitle}}</view>
+      <view class="empty-day" wx:if="{{selectedItems.length === 0}}">这天没有已通过的请假。</view>
+      <view
+        class="leave-row bar-{{item.typeClass}}"
+        wx:for="{{selectedItems}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        data-open="{{item.canOpen ? '1' : '0'}}"
+        bindtap="onOpenLeave"
+        hover-class="{{item.canOpen ? 'row-hover' : ''}}"
+      >
+        <view class="row-top">
+          <view>
+            <text class="row-name">{{item.name}}</text>
+            <text class="muted" wx:if="{{item.department}}"> · {{item.department}}</text>
+          </view>
+          <text class="link" wx:if="{{item.canOpen}}">详情</text>
+        </view>
+        <view class="row-meta c-{{item.typeClass}}">{{item.type}} · {{item.daySpanText}}</view>
+        <view class="muted">{{item.rangeText}}</view>
+      </view>
+    </view>
+  </view>
+</page-state>

@@ -1,0 +1,63 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="sub-page form-page">
+    <view class="banner" wx:if="{{user && !user.name}}">请先到「我的」填写姓名，再提交申请。</view>
+    <view class="card">
+      <view class="label">请假类型</view>
+      <view class="types">
+        <view
+          wx:for="{{types}}"
+          wx:key="*this"
+          class="type {{type === item ? 'on' : ''}}"
+          data-type="{{item}}"
+          bindtap="onType"
+        >{{item}}</view>
+      </view>
+
+      <view class="label">开始</view>
+      <view class="date-row">
+        <picker mode="date" value="{{startDate}}" start="2000-01-01" end="2100-12-31" bindchange="onStartDate">
+          <view class="date-box">{{startDate}}</view>
+        </picker>
+        <view class="seg">
+          <view class="seg-item {{startHalf === 'am' ? 'on' : ''}}" data-field="startHalf" data-half="am" bindtap="onHalf">上午</view>
+          <view class="seg-item {{startHalf === 'pm' ? 'on' : ''}}" data-field="startHalf" data-half="pm" bindtap="onHalf">下午</view>
+        </view>
+      </view>
+
+      <view class="label">结束</view>
+      <view class="date-row">
+        <picker mode="date" value="{{endDate}}" start="2000-01-01" end="2100-12-31" bindchange="onEndDate">
+          <view class="date-box">{{endDate}}</view>
+        </picker>
+        <view class="seg">
+          <view class="seg-item {{endHalf === 'am' ? 'on' : ''}}" data-field="endHalf" data-half="am" bindtap="onHalf">上午</view>
+          <view class="seg-item {{endHalf === 'pm' ? 'on' : ''}}" data-field="endHalf" data-half="pm" bindtap="onHalf">下午</view>
+        </view>
+      </view>
+
+      <view class="duration">
+        <text>请假时长</text>
+        <text class="duration-num">{{durationText}}</text>
+      </view>
+      <view class="muted duration-hint">上午到下午记 1 天，只请上午或下午记 0.5 天。</view>
+      <view class="form-error" wx:if="{{formError}}">{{formError}}</view>
+    </view>
+
+    <view class="card">
+      <view class="label">原因</view>
+      <textarea
+        class="textarea"
+        maxlength="200"
+        value="{{reason}}"
+        bindinput="onReason"
+        placeholder="例如回家处理事务、就医、已安排调休"
+        placeholder-class="ph"
+      />
+      <view class="count">{{reasonCount}}/200</view>
+    </view>
+    <view class="footer-spacer"></view>
+  </view>
+  <view class="footer-bar">
+    <button class="btn-primary block" hover-class="btn-hover" bindtap="onSubmit" loading="{{submitting}}" disabled="{{submitting}}">提交申请</button>
+  </view>
+</page-state>

@@ -1,0 +1,46 @@
+.member {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  color: #fffcf7;
+  text-align: center;
+  line-height: 72rpx;
+  font-weight: 600;
+  margin-right: 20rpx;
+  flex: none;
+}
+
+.member-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.member-name {
+  font-weight: 600;
+}
+
+.text-btn {
+  color: #0f6e56;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+  flex: none;
+}
+
+.me {
+  color: #9a9388;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+}
+
+.retry {
+  margin-top: 16rpx;
+}
+
+.access-copy {
+  margin-top: 8rpx;
+}

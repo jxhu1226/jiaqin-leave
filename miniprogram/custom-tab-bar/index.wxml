@@ -1,0 +1,14 @@
+<view class="tab-bar">
+  <view
+    wx:for="{{visibleTabs}}"
+    wx:key="pagePath"
+    class="tab {{selected === item.pagePath ? 'on' : ''}}"
+    data-path="{{item.pagePath}}"
+    bindtap="onSwitch"
+    hover-class="tab-hover"
+  >
+    <image class="tab-icon" src="{{selected === item.pagePath ? item.selectedIcon : item.icon}}" />
+    <text class="tab-text">{{item.text}}</text>
+    <view class="badge" wx:if="{{item.admin && pendingCount > 0}}">{{pendingCount > 99 ? '99+' : pendingCount}}</view>
+  </view>
+</view>

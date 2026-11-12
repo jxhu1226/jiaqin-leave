@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "审批",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "page-state": "/components/page-state/page-state",
+    "review-dialog": "/components/review-dialog/review-dialog"
+  }
+}

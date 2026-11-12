@@ -1,0 +1,31 @@
+.state {
+  min-height: 70vh;
+  padding: 80rpx 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.state-text {
+  color: #6d675f;
+  font-size: 26rpx;
+}
+
+.state-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.state-desc {
+  color: #6d675f;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.retry {
+  width: 240rpx;
+  margin-top: 32rpx;
+}

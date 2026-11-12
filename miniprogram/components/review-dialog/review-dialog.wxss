@@ -1,0 +1,60 @@
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(36, 49, 44, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx;
+  z-index: 200;
+}
+
+.dialog {
+  width: 100%;
+  background: #fffcf7;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx 28rpx;
+}
+
+.dialog-title {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.dialog-hint {
+  margin-top: 8rpx;
+  color: #6d675f;
+  font-size: 24rpx;
+}
+
+.dialog-input {
+  width: 100%;
+  min-height: 160rpx;
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background: #f6f4ef;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.ph {
+  color: #9a9388;
+}
+
+.dialog-actions {
+  display: flex;
+  margin-top: 24rpx;
+}
+
+.dialog-actions button {
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.dialog-actions button:last-child {
+  margin-right: 0;
+}

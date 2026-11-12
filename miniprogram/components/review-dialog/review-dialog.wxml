@@ -1,0 +1,25 @@
+<view class="mask" wx:if="{{show}}" catchtouchmove="noop">
+  <view class="dialog">
+    <view class="dialog-title">{{title}}</view>
+    <view class="dialog-hint">意见选填，申请人可以在详情里看到。</view>
+    <textarea
+      class="dialog-input"
+      maxlength="100"
+      value="{{comment}}"
+      bindinput="onInput"
+      placeholder="审批意见（选填）"
+      placeholder-class="ph"
+      cursor-spacing="80"
+    />
+    <view class="dialog-actions">
+      <button class="btn-plain sm" hover-class="btn-hover" bindtap="onCancel" disabled="{{loading}}">取消</button>
+      <button
+        class="{{danger ? 'btn-ghost' : 'btn-primary'}} sm"
+        hover-class="btn-hover"
+        bindtap="onConfirm"
+        loading="{{loading}}"
+        disabled="{{loading}}"
+      >{{confirmText}}</button>
+    </view>
+  </view>
+</view>

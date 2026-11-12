@@ -1,0 +1,31 @@
+.person {
+  margin-top: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.range {
+  margin-top: 8rpx;
+}
+
+.meta {
+  margin-top: 4rpx;
+  color: #6d675f;
+}
+
+.body-text,
+.comment {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tl {
+  margin-top: 8rpx;
+}
+
+.comment {
+  margin-top: 16rpx;
+  padding: 16rpx 20rpx;
+  background: #f6f4ef;
+  border-radius: 12rpx;
+}

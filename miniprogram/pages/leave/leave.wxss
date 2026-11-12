@@ -1,0 +1,30 @@
+.summary {
+  margin: 20rpx 4rpx 16rpx;
+  color: #6d675f;
+  font-size: 24rpx;
+}
+
+.range {
+  margin-top: 12rpx;
+  font-size: 28rpx;
+}
+
+.meta {
+  margin-top: 4rpx;
+  color: #6d675f;
+  font-size: 24rpx;
+}
+
+.reason {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: #24312c;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.retry {
+  margin-top: 16rpx;
+}

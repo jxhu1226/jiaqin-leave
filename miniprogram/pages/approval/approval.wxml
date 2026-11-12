@@ -1,0 +1,79 @@
+<page-state booting="{{booting}}" error="{{bootError}}" bind:retry="onRetry">
+  <view class="tab-page" wx:if="{{isAdmin}}">
+    <view class="chips">
+      <view
+        wx:for="{{statusOptions}}"
+        wx:key="value"
+        class="chip {{status === item.value ? 'on' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="onStatus"
+      >{{item.label}}</view>
+    </view>
+    <view class="search-row">
+      <input
+        class="input search-input"
+        placeholder="按姓名筛选"
+        placeholder-class="ph"
+        value="{{keyword}}"
+        bindinput="onKeyword"
+        confirm-type="search"
+        bindconfirm="loadList"
+      />
+      <view class="search-btn" bindtap="loadList">筛选</view>
+    </view>
+    <view class="month-row">
+      <picker mode="date" fields="month" value="{{month || currentMonth}}" bindchange="onMonth">
+        <view class="chip">{{monthLabel}}</view>
+      </picker>
+      <text class="clear" wx:if="{{month}}" bindtap="onClearMonth">清除月份</text>
+    </view>
+
+    <view class="hint" wx:if="{{listLoading || (!loaded && !listError)}}">正在读取申请…</view>
+    <view class="card" wx:elif="{{listError}}">
+      <view>{{listError}}</view>
+      <button class="btn-plain sm retry" hover-class="btn-hover" bindtap="loadList">重试</button>
+    </view>
+    <view class="empty" wx:elif="{{loaded && list.length === 0}}">
+      <view class="empty-title">没有符合条件的申请</view>
+      <view class="muted">换个状态、姓名或月份再看一次。</view>
+    </view>
+    <block wx:else>
+      <view class="card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen" hover-class="card-hover">
+        <view class="card-top">
+          <view class="who-line">{{item.userName || '未命名'}}<text wx:if="{{item.department}}" class="muted"> · {{item.department}}</text></view>
+          <view class="tag tag-{{item.status}}">{{item.statusLabel}}</view>
+        </view>
+        <view class="type-line">
+          <view class="dot dot-{{item.typeClass}}"></view>
+          <text>{{item.type}}</text>
+          <text class="muted"> · {{item.durationText}}</text>
+        </view>
+        <view class="range">{{item.rangeText}}</view>
+        <view class="reason" wx:if="{{item.reason}}">{{item.reason}}</view>
+        <view class="muted time" wx:if="{{item.status === 'pending'}}">提交于 {{item.createdAtText}}</view>
+        <view class="muted time" wx:elif="{{item.reviewerName}}">{{item.reviewerName}} · {{item.reviewedAtText}}</view>
+        <view class="comment" wx:if="{{item.reviewComment}}">{{item.reviewComment}}</view>
+        <view class="action-row" wx:if="{{item.status === 'pending'}}" catchtap="noop">
+          <button class="btn-ghost sm" hover-class="btn-hover" data-id="{{item.id}}" data-decision="rejected" catchtap="openReview">驳回</button>
+          <button class="btn-primary sm" hover-class="btn-hover" data-id="{{item.id}}" data-decision="approved" catchtap="openReview">同意</button>
+        </view>
+      </view>
+      <view class="hint" wx:if="{{truncated}}">仅显示最近 200 条，可再用月份或姓名缩小范围</view>
+    </block>
+  </view>
+  <view class="tab-page" wx:else>
+    <view class="card">
+      <view class="card-title">仅管理员可审批</view>
+      <view class="muted access-copy">成员在「请假」里提交申请，在「日历」查看已经通过的记录。</view>
+    </view>
+  </view>
+  <review-dialog
+    show="{{reviewShow}}"
+    title="{{reviewTitle}}"
+    confirm-text="{{reviewConfirm}}"
+    danger="{{reviewDanger}}"
+    loading="{{reviewing}}"
+    bind:confirm="onConfirmReview"
+    bind:cancel="onCancelReview"
+  />
+</page-state>

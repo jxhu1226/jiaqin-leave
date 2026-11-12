@@ -1,0 +1,90 @@
+.chips,
+.search-row,
+.month-row,
+.type-line,
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.chip {
+  margin: 0 12rpx 12rpx 0;
+  padding: 10rpx 22rpx;
+  border-radius: 999rpx;
+  background: #fffcf7;
+  border: 1rpx solid #e4dfd6;
+  color: #6d675f;
+  font-size: 24rpx;
+}
+
+.chip.on {
+  background: #e7f3ee;
+  color: #0f6e56;
+  border-color: #b7ddd2;
+}
+
+.search-row {
+  margin-top: 8rpx;
+  flex-wrap: nowrap;
+}
+
+.search-input {
+  flex: 1;
+  height: 76rpx;
+}
+
+.search-btn,
+.clear {
+  color: #0f6e56;
+  font-size: 26rpx;
+  padding: 0 8rpx 0 16rpx;
+}
+
+.month-row {
+  margin: 8rpx 0 16rpx;
+}
+
+.who-line {
+  font-weight: 600;
+  font-size: 30rpx;
+}
+
+.type-line,
+.range,
+.time,
+.reason,
+.comment {
+  margin-top: 8rpx;
+}
+
+.reason,
+.comment {
+  font-size: 26rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.action-row {
+  margin-top: 20rpx;
+  flex-wrap: nowrap;
+}
+
+.action-row button {
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.action-row button:last-child {
+  margin-right: 0;
+}
+
+.retry {
+  margin-top: 16rpx;
+}
+
+.access-copy {
+  margin-top: 8rpx;
+}

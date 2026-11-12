@@ -1,0 +1,12 @@
+<view class="state" wx:if="{{booting}}">
+  <view class="spinner"></view>
+  <text class="state-text">{{loadingText}}</text>
+</view>
+<view class="state" wx:elif="{{error}}">
+  <view class="state-title">暂时无法连接</view>
+  <view class="state-desc">{{error}}</view>
+  <button class="btn-primary retry" hover-class="btn-hover" bindtap="onRetry">重试</button>
+</view>
+<view wx:else>
+  <slot></slot>
+</view>

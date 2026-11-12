@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "申请请假",
+  "usingComponents": {
+    "page-state": "/components/page-state/page-state"
+  }
+}
